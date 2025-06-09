@@ -1,6 +1,6 @@
 name: digita_router
 description: "A lightweight, context-free navigation package for Flutter, written entirely in Dart. Navigate between pages without needing BuildContext, perfect for any architecture — including MVVM, BLoC, Riverpod, or plain Flutter."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/digitabank/digita-router
 
 environment:

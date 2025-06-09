@@ -1,3 +1,8 @@
+## 0.0.2
+
+- Minor fixes and improvements
+- Updated documentation and metadata
+
 ## 0.0.1
 
 🎉 Initial release of `digita_router`
