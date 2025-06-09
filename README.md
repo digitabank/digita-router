@@ -19,7 +19,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  digita_router: ^0.0.2
+  digita_router: ^0.1.0
 ```
 
 Then run

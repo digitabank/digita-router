@@ -29,14 +29,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home')),
+      appBar: AppBar(title: const Text('Home')),
       body: Center(
         child: ElevatedButton(
           //  Navigate to the named route '/details' without using context.
           onPressed: () {
             digita.goToNamed('/details');
           },
-          child: Text('View Details'),
+          child: const Text('View Details'),
         ),
       ),
     );
@@ -50,12 +50,12 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Details')),
+      appBar: AppBar(title: const Text('Details')),
       body: Center(
         child: ElevatedButton(
           //  Go back to the previous screen without context.
           onPressed: () => digita.goBack(),
-          child: Text('Go Back'),
+          child: const Text('Go Back'),
         ),
       ),
     );
