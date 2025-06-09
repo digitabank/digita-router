@@ -1,62 +1,56 @@
 import 'package:flutter/material.dart';
 
+/// A lightweight, context-free navigation helper for Flutter.
+///
+/// Use `digita` to navigate between pages without needing a [BuildContext].
 class Digita {
   static final Digita instance = Digita._internal();
   factory Digita() => instance;
   Digita._internal();
 
+  /// The global navigator key required to initialize Digita.
+  ///
+  /// Must be assigned to `navigatorKey` in your [MaterialApp].
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  bool _warned = false;
 
-  void _warnIfNavigatorNotReady() {
-    if (!_warned && navigatorKey.currentState == null) {
-      _warned = true;
-      // Only show in debug mode
-      assert(() {
-        debugPrint(
-          '[digita_router] Warning: navigatorKey is not attached.\n'
-          'Make sure to assign `digita.navigatorKey` to your MaterialApp.\n\n'
-          'MaterialApp(\n  navigatorKey: digita.navigatorKey,\n  ...\n)',
-        );
-        return true;
-      }());
-    }
-  }
-
+  /// Push a new [Widget] page onto the navigation stack.
   Future<dynamic>? goTo(Widget page) {
-    _warnIfNavigatorNotReady();
     return navigatorKey.currentState?.push(
       MaterialPageRoute(builder: (_) => page),
     );
   }
 
+  /// Push a named route onto the navigation stack.
+  ///
+  /// Optionally pass [arguments].
   Future<dynamic>? goToNamed(String routeName, {Object? arguments}) {
-    _warnIfNavigatorNotReady();
     return navigatorKey.currentState?.pushNamed(
       routeName,
       arguments: arguments,
     );
   }
 
+  /// Pop the current page off the stack.
   void goBack() {
-    _warnIfNavigatorNotReady();
-    navigatorKey.currentState?.pop();
+    return navigatorKey.currentState?.pop();
   }
 
+  /// Pop pages until the specified [routeName] is reached.
   void goBackUntil(String routeName) {
-    _warnIfNavigatorNotReady();
-    navigatorKey.currentState?.popUntil(ModalRoute.withName(routeName));
+    return navigatorKey.currentState?.popUntil(ModalRoute.withName(routeName));
   }
 
+  /// Replace the current page with a new [Widget] page.
   Future<dynamic>? replaceWith(Widget page) {
-    _warnIfNavigatorNotReady();
     return navigatorKey.currentState?.pushReplacement(
       MaterialPageRoute(builder: (_) => page),
     );
   }
 
+  /// Replace the current page with a named route.
+  ///
+  /// Optionally pass [arguments].
   Future<dynamic>? replaceNamed(String routeName, {Object? arguments}) {
-    _warnIfNavigatorNotReady();
     return navigatorKey.currentState?.pushReplacementNamed(
       routeName,
       arguments: arguments,
@@ -64,4 +58,5 @@ class Digita {
   }
 }
 
+/// Instance of [Digita] for easy navigation access.
 final Digita digita = Digita();
