@@ -17,8 +17,7 @@ A **lightweight, context-free navigation package** for Flutter, written entirely
 ## You are invited to contribute!
 
 If you are a Flutter developer eager to contribute, you're more than welcome!  
-Open issues, submit pull requests, or suggest new features  
-— and become part of the team behind `digita_router`.  
+Open issues, submit pull requests, or suggest new features — and become part of the team behind [digita_router](https://github.com/digitabank/digita-router).  
 Check out the [contributing guide](https://github.com/digitabank/digita-router/blob/main/CONTRIBUTING.md) to get started.
 
 ---
@@ -116,7 +115,7 @@ ElevatedButton(
 );
 ```
 
-## Github repository: [digita-router: https://github.com/digitabank/digita-router](https://github.com/digitabank/digita-router)
+- Github repository: [digita-router: https://github.com/digitabank/digita-router](https://github.com/digitabank/digita-router)
 
 ## License
 
