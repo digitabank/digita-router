@@ -4,16 +4,26 @@ A **lightweight, context-free navigation package** for Flutter, written entirely
 
 ---
 
-## ✨ Features
+## Features
 
-- 🚫 No `BuildContext` needed
-- 🔁 Simple, declarative navigation API
-- 📦 Works with Flutter's built-in routing
-- ✅ Designed for testability and scalability
+- No `BuildContext` needed
+- Simple and declarative navigation API
+- Seamlessly integrates with Flutter's built-in routing
+- Compatible with architectures like BLoC, Riverpod, MVVM, and plain Flutter
+- Designed for testability, maintainability, and scalability
 
 ---
 
-## 📦 Installation
+## You Are Invited to Contribute!!
+
+If you're a Flutter developer eager to contribute, you're more than welcome!  
+Open issues, submit pull requests, or suggest new features  
+— and become part of the team behind `digita_router`.  
+Check out the [contributing guide](https://github.com/digitabank/digita-router/blob/main/CONTRIBUTING.md) to get started.
+
+---
+
+## Installation
 
 Add this to your `pubspec.yaml`:
 
@@ -34,11 +44,12 @@ Or install directly with:
 flutter pub add digita_router
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Inject the navigatorKey
 
 ```dart
+// Import digita_router
 import 'package:digita_router/digita_router.dart';
 
 void main() {
@@ -49,7 +60,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: digita.navigatorKey, // remember to add this line
+      navigatorKey: digita.navigatorKey, // Just add this line to enable digita_router
       routes: {
         '/': (_) => HomePage(),
         '/details': (_) => DetailsPage(),
@@ -81,11 +92,11 @@ digita.goBack();
 digita.goBackUntil('/');
 ```
 
-## 🧪 Testing Support
+## Testing Support
 
 The package supports Flutter’s widget testing out of the box. Inject `digita.navigatorKey` into `MaterialApp`, and control navigation easily in your widget tests.
 
-## 📚 API references
+## API references
 
 | Method                                                | Description                                     |
 | ----------------------------------------------------- | ----------------------------------------------- |
@@ -96,7 +107,7 @@ The package supports Flutter’s widget testing out of the box. Inject `digita.n
 | `replaceWith(Widget page)`                            | Replaces current route with a widget route      |
 | `replaceNamed(String routeName, {Object? arguments})` | Replaces current route with a named route       |
 
-## 💡 Example
+## Example
 
 ```dart
 ElevatedButton(
@@ -105,6 +116,8 @@ ElevatedButton(
 );
 ```
 
-## 📄 License
+## Github repository: [digita-router: https://github.com/digitabank/digita-router](https://github.com/digitabank/digita-router)
+
+## License
 
 MIT © [DIGITA BANK](https://digitabank.com)
