@@ -24,7 +24,7 @@ If you want to contribute code:
 
 ### Suggest New Features
 
-Have an idea for a feature? Open a discussion or an issue with the `enhancement` label. We welcome feedback and innovation!
+Have an idea for a feature? Open a [discussion](https://github.com/digitabank/digita-router/discussions) or an [issue](https://github.com/digitabank/digita-router/issues) with the `enhancement` label. We welcome feedback and innovation!
 
 ## Code Style
 
@@ -34,7 +34,7 @@ Please follow Flutter's standard formatting using `dart format .`. Run `flutter 
 
 Feel free to reach out via:
 
-- GitHub Discussions
+- [GitHub Discussions](https://github.com/digitabank/digita-router/discussions)
 - Issues and PR comments
 
 ## License
