@@ -45,35 +45,96 @@ flutter pub add digita_router
 
 ## Getting Started
 
-### 1. Inject the navigatorKey
+`digita` is a global instance providing navigation methods without context
+
+### 1. Just inject the navigatorKey and use it on the go
 
 ```dart
-// Import digita_router
+import 'package:flutter/material.dart';
+// import digita_router to access 'digita' for amazing flutter navigation
 import 'package:digita_router/digita_router.dart';
 
 void main() {
   runApp(MyApp());
 }
 
+/// The root widget of the app
+/// add --->  navigatorKey: digita.navigatorKey
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: digita.navigatorKey, // Just add this line to enable digita_router
+      // Required: attach Digita's navigatorKey to MaterialApp
+      // Just add this one line and digita_router is ready to go!
+      navigatorKey: digita.navigatorKey, // <--- This one line does the magic!
+      // Declare routes below if you want named navigation,
+      // or simply omit this if you prefer widget-based navigation.
+      // digita_router supports both:
+      // digita.goTo(DetailsPage()) and digita.goToNamed('/details')
       routes: {
-        '/': (_) => HomePage(),
-        '/details': (_) => DetailsPage(),
+        '/': (_) => const HomePage(),
+        '/details': (_) => const DetailsPage(),
       },
     );
   }
 }
+
+/// The home page with a button to navigate to the details page
+/// using digita commands: digita.goTo() or digita.goToNamed()
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Home')),
+      body: Center(
+        child: ElevatedButton(
+          // Navigate to the DetailsPage without context
+          onPressed: () {
+            // This is very simple, clean, fast, memorable, and everyone loves it — just amazing!
+            digita.goTo(const DetailsPage());
+
+            // Or use this for named route navigation:
+            // digita.goToNamed('/details');
+          },
+          child: const Text('View Details'),
+        ),
+      ),
+    );
+  }
+}
+
+/// The details page with a button to go back
+/// using the digita command: digita.goBack()
+class DetailsPage extends StatelessWidget {
+  const DetailsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Details')),
+      body: Center(
+        child: ElevatedButton(
+          // Go back to the previous screen without context
+          // This is also just amazing!
+          onPressed: () => digita.goBack(),
+          child: const Text('Go Back'),
+        ),
+      ),
+    );
+  }
+}
+
 ```
 
 ### 2. Use the navigation methods — anywhere, no context required!
 
 ```dart
 // Push a widget
-digita.goTo(DetailsPage());
+digita.goTo(const DetailsPage());
 
 // Push named route
 digita.goToNamed('/details', arguments: {'userId': 123});
@@ -95,7 +156,7 @@ digita.goBackUntil('/');
 
 The package supports Flutter’s widget testing out of the box. Inject `digita.navigatorKey` into `MaterialApp`, and control navigation easily in your widget tests.
 
-## API references
+## API Reference
 
 | Method                                                | Description                                     |
 | ----------------------------------------------------- | ----------------------------------------------- |
@@ -108,10 +169,30 @@ The package supports Flutter’s widget testing out of the box. Inject `digita.n
 
 ## Example
 
+1. `digita.goTo()`
+
 ```dart
 ElevatedButton(
-  onPressed: () => digita.goToNamed('/details', arguments: {'id': 123}),
-  child: Text('View Details'),
+  onPressed: () => digita.goTo(const DetailsPage()),
+  child: const Text('View Details'),
+);
+```
+
+2. `digita.goToNamed()`
+
+```dart
+ElevatedButton(
+  onPressed: () => digita.goToNamed('/details'),
+  child: const Text('View Details'),
+);
+```
+
+3. `digita.goBack()`
+
+```dart
+ElevatedButton(
+  onPressed: () => digita.goBack(),
+  child: const Text('Go Back'),
 );
 ```
 
