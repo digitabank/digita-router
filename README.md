@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
       // Declare routes below if you want named navigation,
       // or simply omit this if you prefer widget-based navigation.
       // digita_router supports both:
-      // digita.goTo(DetailsPage()) and digita.goToNamed('/details')
+      // digita.goTo(const DetailsPage()) and digita.goToNamed('/details')
       routes: {
         '/': (_) => const HomePage(),
         '/details': (_) => const DetailsPage(),
@@ -140,7 +140,7 @@ digita.goTo(const DetailsPage());
 digita.goToNamed('/details', arguments: {'userId': 123});
 
 // Replace current with a widget
-digita.replaceWith(SettingsPage());
+digita.replaceWith(const SettingsPage());
 
 // Replace current page with a named route
 digita.replaceNamed('/settings');
