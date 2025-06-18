@@ -1,4 +1,4 @@
-## 0.1.1 [Unreleased]
+## 0.2.0
 
 ### Added
 
@@ -12,6 +12,7 @@
   - `replaceRouteWith()` — replaces deprecated `replaceNamed()`
 - Updated example code with detailed comments for improved clarity.
 - Improved documentation and added a comprehensive example demonstrating both widget-based and named route navigation.
+
 - Added widget tests for `digita_router` navigation functionalities:
   - Navigation without context by pushing widget-based pages.
   - Named route navigation.

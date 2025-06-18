@@ -6,7 +6,7 @@
 
 A **lightweight, context-free navigation package** for Flutter, written entirely in Dart. Navigate between pages without needing `BuildContext`.
 
-## Works With Any Architecture
+## Works with any architecture
 
 Whether you're using:
 
@@ -15,7 +15,7 @@ Whether you're using:
 - Provider
 - MVVM
 - Clean Architecture  
-  `digita_router` lets you navigate globally with no `BuildContext`, improving separation of concerns and testability.
+  `digita_router` lets you navigate globally with no `BuildContext`, improving readability, functionality and testability.
 
 ---
 
@@ -32,7 +32,6 @@ Whether you're using:
 ## You are invited to contribute!
 
 If you are a Flutter developer eager to contribute, you're more than welcome!  
-Open issues, submit pull requests, or suggest new features — and become part of the team behind [digita_router](https://github.com/digitabank/digita-router).  
 Check out the [contributing guide](https://github.com/digitabank/digita-router/blob/main/CONTRIBUTING.md) to get started.
 
 ---
@@ -43,7 +42,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  digita_router: ^0.1.0
+  digita_router: ^0.2.0
 ```
 
 Then run
@@ -62,7 +61,7 @@ flutter pub add digita_router
 
 `digita` is a global instance providing navigation methods without context
 
-### 1. Just inject the navigatorKey and use it on the go
+### 1. Import digita_router and inject the navigatorKey and use it on the go
 
 ```dart
 import 'package:flutter/material.dart';
