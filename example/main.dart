@@ -37,8 +37,8 @@ class MyApp extends StatelessWidget {
 /// The home screen of the app.
 ///
 /// Demonstrates two main navigation methods:
-/// 1. Widget-based navigation using `digita.openPage()`
-/// 2. Named route navigation using `digita.openRoute()`
+/// 1. Widget-based navigation using `digita.goTo()`
+/// 2. Named route navigation using `digita.goToRoute()`
 ///
 /// Both methods do NOT require a BuildContext, simplifying your navigation calls.
 class HomePage extends StatelessWidget {
@@ -85,8 +85,8 @@ class HomePage extends StatelessWidget {
 
 /// The details screen.
 ///
-/// Shows how to close the current page and return to the previous screen
-/// without requiring BuildContext by using `digita.closePage()`.
+/// Shows how to close the current page and go back to the previous screen
+/// without requiring BuildContext by using `digita.goBack()`.
 class DetailsPage extends StatelessWidget {
   const DetailsPage({super.key});
 
@@ -98,7 +98,6 @@ class DetailsPage extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             // Pop the current page off the navigation stack.
-            // You also can use digita.goBack()
             digita.goBack();
           },
           child: const Text('Go Back'),
@@ -110,7 +109,7 @@ class DetailsPage extends StatelessWidget {
 
 /// An additional page to demonstrate navigation.
 ///
-/// Also uses `digita.closePage()` to return to the previous page without BuildContext.
+/// Also uses `digita.goBack()` to return to the previous page without BuildContext.
 class AnotherPage extends StatelessWidget {
   const AnotherPage({super.key});
 
@@ -122,7 +121,6 @@ class AnotherPage extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             // Go back to the previous page without requiring BuildContext.
-            // You also can use digita.goBack()
             digita.goBack();
           },
           child: const Text('Back to Home'),
