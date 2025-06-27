@@ -1,3 +1,29 @@
+## 0.3.0
+
+### Breaking Changes
+
+- **Refactored API Method Names and Parameters**  
+  Improved method naming and parameter consistency for better clarity and usability.
+
+- **Navigation API Restriction**  
+  Only the following navigation methods are now supported:
+
+  - `goTo()`
+  - `goBack()`
+  - `goToRoute()`
+  - `goBackTo()`
+  - `closeAllPages()`
+  - `replacePageWith()`
+  - `replaceRouteWith()`
+
+- **Deprecation Notice**  
+  All other navigation methods are now deprecated and will be removed in version `0.5.0`.
+
+### Other Changes
+
+- Updated documentation to reflect API changes.
+- Updated test cases and coverage based on the refined API.
+
 ## 0.2.0
 
 ### Added

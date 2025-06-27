@@ -14,8 +14,9 @@ Whether you're using:
 - Riverpod
 - Provider
 - MVVM
-- Clean Architecture  
-  `digita_router` lets you navigate globally with no `BuildContext`, improving readability, functionality and testability.
+- Clean Architecture
+
+`digita_router` lets you navigate globally with no `BuildContext`, improving readability, functionality and testability.
 
 ---
 
@@ -96,33 +97,23 @@ class MyApp extends StatelessWidget {
 
 ```dart
 // Push a widget-based page
-digita.openPage(const DetailsPage());
+digita.goTo(const DetailsPage());
 
-// Close the current page
-digita.closePage()
+// Go back to the previous page
+digita.goBack();
 
-// Close all the pages and back to home
-digita.closeAllPages()
+// Go back until a named route is found on the stack
+digita.goBackTo('/');
 
-// Push a named route
-digita.openRoute('/details');
+// Close all pages and go back to home
+digita.closeAllPages();
 
-// Close route
-// Alias of digita.closePage()
-digita.closeRoute()
 
 // Replace current with widget
 digita.replacePageWith(const AnotherPage());
 
 // Replace current with named route
 digita.replaceRouteWith('/another');
-
-// Go back
-// Alias of digita.closePage()
-digita.goBack();
-
-// Pop to a specific route
-digita.goBackUntil('/');
 
 ```
 
@@ -131,13 +122,13 @@ digita.goBackUntil('/');
 ```dart
 // Push a new widget-based page onto the stack
 ElevatedButton(
-  onPressed: () => digita.openPage(const DetailsPage()),
+  onPressed: () => digita.goTo(const DetailsPage()),
   child: const Text('View Details'),
 );
 
-// Close the current page (pops the top route from the navigation stack)
+// Close the current page and go back to the previous page
 ElevatedButton(
-  onPressed: () => digita.closePage(),
+  onPressed: () => digita.goBack(),
   child: const Text('Go Back'),
 );
 
@@ -149,14 +140,8 @@ ElevatedButton(
 
 // Navigate to a named route (pushes '/details' onto the stack)
 ElevatedButton(
-  onPressed: () => digita.openRoute('/details'),
+  onPressed: () => digita.goToRoute('/details'),
   child: const Text('View Details (Named)'),
-);
-
-// Close the current named route (same as closePage, but semantically named)
-ElevatedButton(
-  onPressed: () => digita.closeRoute(),
-  child: const Text('Go Back'),
 );
 
 // Replace the current page with a new widget-based page (no back stack)
@@ -171,10 +156,10 @@ ElevatedButton(
   child: const Text('Replace with Named Route'),
 );
 
-// Alias for closePage(); used to go back to previous screen
+// Go back until a named route is found on the stack
 ElevatedButton(
-  onPressed: () => digita.goBack(),
-  child: const Text('Go Back'),
+  onPressed: () => digita.goBackTo('/'),
+  child: const Text('Go Back to Home'),
 );
 
 ```
@@ -187,19 +172,13 @@ The package supports Flutter’s widget testing out of the box. Inject `digita.n
 
 | Method                                                    | Description                                                            |
 | --------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `openPage(Widget page)`                                   | Pushes a new widget-based page onto the navigation stack               |
-| `closePage()`                                             | Closes the current page (pops the top route)                           |
-| `closeAllPages()`                                         | Closes all routes and returns to the root ("/")                        |
-| `openRoute(String routeName, {Object? arguments})`        | Pushes a named route onto the stack                                    |
-| `closeRoute()`                                            | Closes the current named route (alias of `closePage()`)                |
+| `goTo(Widget page)`                                       | Pushes a new widget-based page onto the navigation stack               |
+| `goBack()`                                                | Pops the current page off the navigation stack (go back)               |
+| `closeAllPages()`                                         | Pops all pages until reaching the root (first) page                    |
+| `goToRoute(String routeName, {Object? arguments})`        | Pushes a named route onto the navigation stack                         |
+| `goBackTo(String routeName)`                              | Pops pages until the route with the specified name is reached          |
 | `replacePageWith(Widget page)`                            | Replaces the current page with a new widget-based page (no back stack) |
 | `replaceRouteWith(String routeName, {Object? arguments})` | Replaces the current page with a named route (no back stack)           |
-| `goBack()`                                                | Alias for `closePage()`; used to go back to the previous screen        |
-| `goBackUntil(String routeName)`                           | Pops routes until the given named route is reached                     |
-| `goTo(Widget page)`                                       | Alias for `openPage()`                                                 |
-| `goToRoute(String routeName, {Object? arguments})`        | Alias for `openRoute()`                                                |
-| `replaceWith(Widget page)`                                | _Deprecated_: use `replacePageWith()`                                  |
-| `replaceNamed(String routeName)`                          | _Deprecated_: use `replaceRouteWith()`                                 |
 
 ## Repository
 

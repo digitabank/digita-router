@@ -58,7 +58,7 @@ void main() {
     expect(find.text('Details Page'), findsNothing);
 
     // Use digita_router to open DetailsPage directly by widget
-    digita.openPage(const DetailsPage());
+    digita.goTo(const DetailsPage());
     await tester.pumpAndSettle(); // Wait for navigation animation to complete
 
     // Confirm that DetailsPage is now displayed instead of HomePage
@@ -66,7 +66,7 @@ void main() {
     expect(find.text('Home Page'), findsNothing);
 
     // Navigate back to previous page (HomePage) using digita.goBack()
-    digita.closePage();
+    digita.goBack();
     await tester.pumpAndSettle();
 
     // HomePage should be visible again, DetailsPage hidden
@@ -74,7 +74,7 @@ void main() {
     expect(find.text('Details Page'), findsNothing);
 
     // Navigate to DetailsPage using named route
-    digita.openRoute('/details');
+    digita.goToRoute('/details');
     await tester.pumpAndSettle();
 
     // Verify DetailsPage is shown
@@ -101,18 +101,18 @@ void main() {
     await tester.pumpWidget(createApp());
 
     // Push '/details' named route onto the stack
-    digita.openRoute('/details');
+    digita.goToRoute('/details');
     await tester.pumpAndSettle();
 
     // Push '/another' named route on top
-    digita.openRoute('/another');
+    digita.goToRoute('/another');
     await tester.pumpAndSettle();
 
     // Verify AnotherPage is currently shown
     expect(find.text('Another Page'), findsOneWidget);
 
     // Pop navigation stack until reaching the route named '/'
-    digita.goBackUntil('/');
+    digita.goBackTo('/');
     await tester.pumpAndSettle();
 
     // Confirm HomePage is displayed after popping intermediate routes

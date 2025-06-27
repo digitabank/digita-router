@@ -2,145 +2,117 @@ import 'package:flutter/material.dart';
 
 /// A lightweight, context-free navigation helper for Flutter.
 ///
-/// Use `digita` to navigate between pages without needing a [BuildContext].
+/// Use [digita] to navigate between pages without needing a [BuildContext].
 class Digita {
-  static final Digita instance = Digita._internal();
-  factory Digita() => instance;
   Digita._internal();
+  static final Digita instance = Digita._internal();
 
-  /// The global navigator key required to initialize Digita.
-  ///
-  /// Must be assigned to `navigatorKey` in your [MaterialApp].
+  /// Global navigator key to be set in your [MaterialApp].
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  /// Ensure digita router is ready
-  ///
-  /// Assign (navigatorKey: digita.navigatorKey) to your MaterialApp
-  void ensureRouterIsReady() {
-    if (navigatorKey.currentState == null) {
+  /// Ensures that the navigator is available before navigation operations.
+  void _ensureRouterIsReady() {
+    final isReady = navigatorKey.currentState != null;
+    if (!isReady) {
       debugPrint(
-          '[Digita] Navigator is not ready. Make sure you assigned [navigatorKey: digita.navigatorKey] to MaterialApp');
+        '[Digita] Navigator not ready. Assign [navigatorKey: digita.navigatorKey] to your MaterialApp.',
+      );
       throw Exception('Navigator not ready');
     }
   }
 
-  /// Push a new [Widget] page onto the navigation stack.
-  Future<Object?>? openPage(Widget page) {
-    ensureRouterIsReady();
+  /// Pushes a [page] onto the navigation stack.
+  Future<Object?>? goTo(Widget page) {
+    _ensureRouterIsReady();
     return navigatorKey.currentState?.push(
       MaterialPageRoute(builder: (_) => page),
     );
   }
 
-  /// Pop the current page off the stack.
-  void closePage() {
+  /// Pops the current page off the stack.
+  void goBack() {
+    _ensureRouterIsReady();
     navigatorKey.currentState?.pop();
   }
 
-  /// Pop all pages off the stack until the root ('/') route.
-  void closeAllPages() {
-    navigatorKey.currentState?.popUntil((route) => route.isFirst);
-  }
-
-  /// Push a new [Widget] page onto the navigation stack.
-  ///
-  /// Alias for [openPage].
-  Future<Object?>? goTo(Widget page) {
-    return openPage(page);
-  }
-
-  /// Push a named route onto the navigation stack.
-  /// Optionally pass [arguments].
-  Future<Object?>? openRoute(String routeName, {Object? arguments}) {
-    ensureRouterIsReady();
-    return navigatorKey.currentState?.pushNamed(
-      routeName,
-      arguments: arguments,
-    );
-  }
-
-  /// Close the current route and go back to the previous
-  ///
-  /// Alias for [closePage].
-  void closeRoute() {
-    closePage();
-  }
-
-  /// Push a named route onto the navigation stack.
-  /// Optionally pass [arguments].
-  /// Alias for [openRoute].
+  /// Pushes a named route onto the stack.
   Future<Object?>? goToRoute(String routeName, {Object? arguments}) {
-    ensureRouterIsReady();
+    _ensureRouterIsReady();
     return navigatorKey.currentState?.pushNamed(
       routeName,
       arguments: arguments,
     );
   }
 
-  /// Go back to the previous page.
-  ///
-  /// Alias for [closePage].
-  void goBack() {
-    closePage();
-  }
-
-  /// Pop pages until the specified [routeName] is reached.
-  void goBackUntil(String routeName) {
+  /// Pops pages until the route with [routeName] is reached.
+  void goBackTo(String routeName) {
+    _ensureRouterIsReady();
     navigatorKey.currentState?.popUntil(ModalRoute.withName(routeName));
   }
 
-  /// Replace the current page with a new [Widget] page.
+  /// Replaces the current page with a new [page].
   Future<Object?>? replacePageWith(Widget page) {
+    _ensureRouterIsReady();
     return navigatorKey.currentState?.pushReplacement(
       MaterialPageRoute(builder: (_) => page),
     );
   }
 
-  /// Replace the current page with a named route.
-  /// Optionally pass [arguments].
+  /// Replaces the current page with a named route.
   Future<Object?>? replaceRouteWith(String routeName, {Object? arguments}) {
+    _ensureRouterIsReady();
     return navigatorKey.currentState?.pushReplacementNamed(
       routeName,
       arguments: arguments,
     );
   }
 
-  /// ------------------
-  /// Deprecated methods
-  /// ------------------
-  ///
-  /// Replace the current page with a new [Widget] page.
-  ///
+  /// Pops all pages until reaching the root (first) page.
+  void closeAllPages() {
+    _ensureRouterIsReady();
+    navigatorKey.currentState?.popUntil((route) => route.isFirst);
+  }
+
+  // --- Deprecated Methods ---
+
+  /// Deprecated: Use [goTo] instead.
+  @Deprecated('Use goTo instead')
+  Future<Object?>? openPage(Widget page) {
+    _ensureRouterIsReady();
+    return goTo(page);
+  }
+
+  /// Deprecated: Use [goBack] instead.
+  @Deprecated('Use goBack instead')
+  void closePage() => goBack();
+
+  /// Deprecated: Use [goBack] instead.
+  @Deprecated('Use goBack instead')
+  void closeRoute() => goBack();
+
+  /// Deprecated: Use [goBackTo] instead.
+  @Deprecated('Use goBackTo instead')
+  void goBackUntil(String routeName) => goBackTo(routeName);
+
   /// Deprecated: Use [replacePageWith] instead.
   @Deprecated('Use replacePageWith instead')
-  Future<Object?>? replaceWith(Widget page) {
-    return navigatorKey.currentState?.pushReplacement(
-      MaterialPageRoute(builder: (_) => page),
-    );
-  }
+  Future<Object?>? replaceWith(Widget page) => replacePageWith(page);
 
-  /// Replace the current page with a named route.
-  ///
   /// Deprecated: Use [replaceRouteWith] instead.
   @Deprecated('Use replaceRouteWith instead')
-  Future<Object?>? replaceNamed(String routeName, {Object? arguments}) {
-    return navigatorKey.currentState?.pushReplacementNamed(
-      routeName,
-      arguments: arguments,
-    );
-  }
+  Future<Object?>? replaceNamed(String routeName, {Object? arguments}) =>
+      replaceRouteWith(routeName, arguments: arguments);
 
-  /// Push a named route onto the navigation stack.
-  ///
   /// Deprecated: Use [goToRoute] instead.
   @Deprecated('Use goToRoute instead')
-  Future<Object?>? goToNamed(String routeName, {Object? arguments}) {
-    return navigatorKey.currentState?.pushNamed(
-      routeName,
-      arguments: arguments,
-    );
-  }
+  Future<Object?>? goToNamed(String routeName, {Object? arguments}) =>
+      goToRoute(routeName, arguments: arguments);
+
+  /// Deprecated: Use [goToRoute] instead.
+  @Deprecated('Use goToRoute instead')
+  Future<Object?>? openRoute(String routeName, {Object? arguments}) =>
+      goToRoute(routeName, arguments: arguments);
 }
 
-/// Instance of [Digita] for easy navigation access.
-final Digita digita = Digita();
+/// Singleton instance of [Digita] for global navigation access.
+final Digita digita = Digita.instance;

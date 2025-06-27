@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 // Navigate to DetailsPage by pushing a widget.
                 // No BuildContext required.
-                digita.openPage(const DetailsPage());
+                digita.goTo(const DetailsPage());
               },
               child: const Text('View Details (Page based)'),
             ),
@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigate to DetailsPage by named route.
-                digita.openRoute('/details');
+                digita.goToRoute('/details');
               },
               child: const Text('View Details (Route based)'),
             ),
@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigate to AnotherPage by named route.
-                digita.openRoute('/another');
+                digita.goToRoute('/another');
               },
               child: const Text('Go to Another Page'),
             ),
@@ -99,7 +99,7 @@ class DetailsPage extends StatelessWidget {
           onPressed: () {
             // Pop the current page off the navigation stack.
             // You also can use digita.goBack()
-            digita.closePage();
+            digita.goBack();
           },
           child: const Text('Go Back'),
         ),
@@ -123,7 +123,7 @@ class AnotherPage extends StatelessWidget {
           onPressed: () {
             // Go back to the previous page without requiring BuildContext.
             // You also can use digita.goBack()
-            digita.closePage();
+            digita.goBack();
           },
           child: const Text('Back to Home'),
         ),
