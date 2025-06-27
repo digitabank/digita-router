@@ -43,7 +43,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  digita_router: ^0.2.0
+  digita_router: ^0.3.0
 ```
 
 Then run
@@ -132,6 +132,12 @@ ElevatedButton(
   child: const Text('Go Back'),
 );
 
+// Go back until a named route is found on the stack
+ElevatedButton(
+  onPressed: () => digita.goBackTo('/'),
+  child: const Text('Go Back to Home'),
+);
+
 // Close all pages and return to the root ("/") route
 ElevatedButton(
   onPressed: () => digita.closeAllPages(),
@@ -156,11 +162,6 @@ ElevatedButton(
   child: const Text('Replace with Named Route'),
 );
 
-// Go back until a named route is found on the stack
-ElevatedButton(
-  onPressed: () => digita.goBackTo('/'),
-  child: const Text('Go Back to Home'),
-);
 
 ```
 

@@ -5,7 +5,7 @@
 - **Refactored API Method Names and Parameters**  
   Improved method naming and parameter consistency for better clarity and usability.
 
-- **Navigation API Restriction**  
+- **Supported Navigation API**  
   Only the following navigation methods are now supported:
 
   - `goTo()`
